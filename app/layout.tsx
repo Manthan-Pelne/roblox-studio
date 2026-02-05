@@ -32,7 +32,9 @@ export default function RootLayout({
         <SidebarProvider>
           <AppSidebar/>
           <SidebarTrigger/>
+          <section className="w-full pr-5">
         {children}
+          </section>
         </SidebarProvider>
       </body>
     </html>

@@ -44,10 +44,10 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
+              <a href="/">
     
                 <div className="grid flex-1 text-left text-sm leading-tight group-data-[collapsible=icon]:hidden">
-                 <a href="/" className="font-extrabold text-xl flex items-center gap-1 shrink-0 mb-1">
+                 <div className="font-extrabold text-xl flex items-center gap-1 shrink-0 mb-1">
                 <svg className="text-primary" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24">
                     <path fill="currentColor" d="M12 12.3L3.5 7.05L12 1.8l8.5 5.25z"/>
                     <path fill="currentColor" d="M12 22.2v-9.9l8.5-5.25v9.9z" opacity="0.25"/>
@@ -55,7 +55,7 @@ export function AppSidebar() {
                 </svg>
                 Roblox
                 <span className="text-primary">Studio.</span>
-                  </a>
+                  </div>
                 </div>
               </a>
             </SidebarMenuButton>
@@ -69,7 +69,7 @@ export function AppSidebar() {
         {/* 2. Main Navigation Group */}
         <SidebarGroup>
           <SidebarGroupLabel className="group-data-[collapsible=icon]:hidden text-sm">Navigation</SidebarGroupLabel>
-          <SidebarMenu>
+          <SidebarMenu className="font-medium text-muted-foreground hover:text-foreground">
             <SidebarMenuItem>
               <SidebarMenuButton tooltip="Home">
                 <Home /> <span>Home</span>
@@ -117,7 +117,7 @@ export function AppSidebar() {
             </SidebarGroupLabel>
             <CollapsibleContent className="animate-collapsible-down">
               <SidebarGroupContent>
-                <SidebarMenu>
+                <SidebarMenu className="font-medium text-muted-foreground hover:text-foreground">
                   {[
                     { title: "About Us", icon: Info },
                     { title: "Contact Us", icon: Mail },
