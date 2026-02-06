@@ -1,9 +1,25 @@
 
 import { TextAnimate } from '@/components/ui/text-animate';
+import ProductCarousel from './productCarousel';
+
 
 const HomePage = () => {
+
+  const product = [
+    { id: 1, name: "Cyberpunk Vest", category: "Shirts", image: "/1758785091458-TRASHER.png" },
+    { id: 2, name: "Y2K Baggies", category: "Pants", image: "/1758793362119-group.png" },
+    { id: 3, name: "Anime Katana", category: "Accessory", image: "/1758785091458-TRASHER.png" },
+    { id: 4, name: "Streetwear Hoodie", category: "Shirts", image: "/1758793362119-group.png" },
+    { id: 5, name: "Tactical Cargo", category: "Pants", image: "/1758785091458-TRASHER.png" },
+    { id: 6, name: "Gothic Corset", category: "Shirts", image: "/1758793362119-group.png" },
+    { id: 7, name: "Neon Sneakers", category: "Shoes", image: "/1758785091458-TRASHER.png" },
+    { id: 8, name: "Royal Cape", category: "Back", image: "/1758793362119-group.png" },
+  ];
+
   return (
-      <div className="relative w-full h-max mt-4 mx-auto overflow-hidden rounded-3xl border border-black/5 dark:border-white/10 shadow-md bg-white dark:bg-zinc-900">
+<>
+
+      <div className="relative w-full h-max mx-auto mt-2 overflow-hidden rounded-3xl border border-black/5 dark:border-white/10 shadow-md bg-white dark:bg-zinc-900">
         
         {/* Decorative Background Elements */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
@@ -11,9 +27,9 @@ const HomePage = () => {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.09] dark:opacity-[0.05] [background-image:linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] [background-size:40px_40px]"></div>
         </div>
 
-        <div className="relative z-10 text-center py-14 px-6 ">
+        <div className="relative z-10 text-center py-12 px-6 ">
           {/* Badge */}
-          <span className="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest uppercase text-primary bg-primary/10 rounded-full">
+          <span className="inline-block px-4 py-1.5 mb-2 text-xs font-bold tracking-widest uppercase text-primary bg-primary/10 rounded-full">
             The Industry Standard
           </span>
 
@@ -33,24 +49,25 @@ const HomePage = () => {
           </TextAnimate>
 
           {/* Description */}
-          <p className="w-full max-w-2xl mx-auto mt-4 text-l font-medium text-muted-foreground dark:text-zinc-400 mb-10 leading-relaxed">
+          <p className="w-full max-w-2xl mx-auto mt-4 text-l font-medium text-muted-foreground dark:text-zinc-400  leading-relaxed">
             Access the largest library of professional-grade 
             <span className="text-primary dark:text-white font-bold"> shirts, pants, and 3D assets.</span> 
             Crafted for creators who demand high-fidelity designs.
           </p>
-
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <button className="px-8 py-4 bg-primary text-white font-bold rounded-xl hover:scale-105 transition-transform shadow-md">
-              Browse Collection
-            </button>
-            <button className="px-8 py-4 bg-zinc-100 shadow-md dark:bg-zinc-800 text-muted dark:text-white font-bold rounded-2xl hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors">
-              Sell Your Designs
-            </button>
-          </div>
-
         </div>
+
       </div>
+
+     <h2 className='mb-5 mt-7 text-muted font-bold text-lg italic rounded-sm px-4 py-1 bg-linear-to-r from-primary/5 to-secondary/20'>T-Shirts Collection</h2>
+      <ProductCarousel product={product} />
+
+       <h2 className='mb-5 mt-7 text-muted font-bold text-lg italic rounded-sm px-4 py-1 bg-linear-to-r from-primary/5 to-secondary/20'>T-Shirts Collection</h2>
+      <ProductCarousel product={product} />
+
+       <h2 className='mb-5 mt-7 text-muted font-bold text-lg italic rounded-sm px-4 py-1 bg-linear-to-r from-primary/5 to-secondary/20'>T-Shirts Collection</h2>
+      <ProductCarousel product={product} />
+
+</>
   );
 };
 
