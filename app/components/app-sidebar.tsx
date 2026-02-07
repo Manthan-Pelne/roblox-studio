@@ -28,6 +28,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
+import Link from "next/link"
 
 
 const categories = [
@@ -68,7 +69,7 @@ export function AppSidebar() {
       <SidebarContent>
         {/* 2. Main Navigation Group */}
         <SidebarGroup>
-          <SidebarGroupLabel className="group-data-[collapsible=icon]:hidden text-sm">Navigation</SidebarGroupLabel>
+          <SidebarGroupLabel className="group-data-[collapsible=icon]:hidden text-base">Navigation</SidebarGroupLabel>
           <SidebarMenu className="font-medium text-muted-foreground hover:text-foreground">
             <SidebarMenuItem>
               <SidebarMenuButton tooltip="Home">
@@ -85,7 +86,9 @@ export function AppSidebar() {
 
 
         <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-          <SidebarGroupLabel className="text-sm">Categories</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-base flex justify-between">Categories 
+             <Link href="/categories" className="text-xs border-2 border-secondary rounded-xl px-3 py-0.5">View All</Link>
+          </SidebarGroupLabel>
           {/* We use max-h and custom scrollbar for a sleek feel */}
           <SidebarGroupContent className="max-h-[180px] overflow-y-auto pl-2 scrollbar-thin scrollbar-thumb-muted">
             <SidebarMenu>
@@ -109,7 +112,7 @@ export function AppSidebar() {
         {/* 3. Collapsible Support Group */}
         <Collapsible defaultOpen className="group/collapsible">
           <SidebarGroup>
-            <SidebarGroupLabel asChild className="text-sm group-data-[collapsible=icon]:hidden">
+            <SidebarGroupLabel asChild className="text-base group-data-[collapsible=icon]:hidden">
               <CollapsibleTrigger className="">
                 Support
                 <ChevronDown className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-180" />

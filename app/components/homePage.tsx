@@ -1,7 +1,7 @@
 
 import { TextAnimate } from '@/components/ui/text-animate';
 import ProductCarousel from './productCarousel';
-
+import Link from 'next/link';
 
 const HomePage = () => {
 
@@ -17,8 +17,8 @@ const HomePage = () => {
   ];
 
   return (
-<>
 
+<>
       <div className="relative w-full h-max mx-auto mt-2 overflow-hidden rounded-3xl border border-black/5 dark:border-white/10 shadow-md bg-white dark:bg-zinc-900">
         
         {/* Decorative Background Elements */}
@@ -58,7 +58,12 @@ const HomePage = () => {
 
       </div>
 
-     <h2 className='mb-5 mt-7 text-muted font-bold text-lg italic rounded-sm px-4 py-1 bg-linear-to-r from-primary/5 to-secondary/20'>T-Shirts Collection</h2>
+
+   <div className='mb-5 mt-7 bg-linear-to-r from-primary/5 to-secondary/20 flex justify-between items-center px-4 py-1 '>
+     <h2 className='text-muted font-bold text-lg italic rounded-sm '>T-Shirts Collection</h2>
+     <Link href="/" className='text-sm cursor-pointer font-semibold '>view more</Link>
+   </div>
+
       <ProductCarousel product={product} />
 
        <h2 className='mb-5 mt-7 text-muted font-bold text-lg italic rounded-sm px-4 py-1 bg-linear-to-r from-primary/5 to-secondary/20'>T-Shirts Collection</h2>

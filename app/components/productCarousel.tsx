@@ -19,7 +19,7 @@ const ProductCarousel = ({ product}:any) => {
               <div className="group relative bg-white dark:bg-zinc-900 border border-black/15 dark:border-white/10 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                 
                 {/* Image Container */}
-                <div className="relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+                <div className="relative aspect-square overflow-hidden bg-[#f6f5f5] dark:bg-zinc-800">
                   <img 
                     src={item.image} 
                     alt={item.name}
