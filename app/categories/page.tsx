@@ -1,84 +1,110 @@
+import { ArrowBigRight } from 'lucide-react';
+import Link from 'next/link';
 import React from 'react';
-import { 
-  Shirt, 
-  Layers, 
-  Gamepad2, 
-  Palette, 
-  Sparkles, 
-  Sword, 
-  Box, 
-  User, 
-  Zap, 
-  Crown 
-} from 'lucide-react';
 
 const CategoriesPage = () => {
-  const categories = [
-    { name: "Classic Shirts", count: "12k+", icon: <Shirt />, color: "bg-blue-500" },
-    { name: "Tactical Pants", count: "8k+", icon: <Layers />, color: "bg-emerald-500" },
-    { name: "3D Accessories", count: "5k+", icon: <Box />, color: "bg-purple-500" },
-    { name: "Game Passes", count: "2k+", icon: <Gamepad2 />, color: "bg-orange-500" },
-    { name: "UGC Limiteds", count: "1k+", icon: <Sparkles />, color: "bg-pink-500" },
-    { name: "Weapon Skins", count: "3k+", icon: <Sword />, color: "bg-red-500" },
-    { name: "Avatar Bundles", count: "4k+", icon: <User />, color: "bg-indigo-500" },
-    { name: "VFX & GFX", count: "900+", icon: <Zap />, color: "bg-yellow-500" },
-    { name: "Premium UI Kits", count: "150+", icon: <Palette />, color: "bg-cyan-500" },
-    { name: "VIP Templates", count: "300+", icon: <Crown />, color: "bg-amber-500" },
+  const allCategories = [
+    "Melee", "Accessories", "Back", "Body Part", "Buildings", "Clothing",
+    "Explosive", "Face", "Shirts", "Pants", "Front", "Gear", "Hair",
+    "Hats", "Heads", "Musical", "Navigation", "Neck", "Power Up",
+    "Ranged", "Shoulder", "Social", "T-Shirts", "Transport", "Waist"
   ];
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] border rounded-3xl dark:bg-zinc-950 p-6 md:p-8 mt-3">
-      
+    <div className="min-h-screen bg-[#FAFAFA] border rounded-3xl dark:bg-zinc-950 p-6 md:p-7 mt-3">
+
       {/* --- Hero Section --- */}
-      <section className="relative w-full rounded-3xl overflow-hidden bg-linear-to-tr from-primary to-secondary py-16 px-8 mb-8 shadow-2xl">
-        {/* Background Glow */}
-        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px]"></div>
-        
+      <section className="relative w-full rounded-3xl overflow-hidden bg-linear-to-tr from-primary to-secondary py-20 px-10 mb-8 shadow-2xl">
+
+        <div
+          className="absolute top-10 left-10 w-42 h-36 bg-white/10 blur-sm rotate-12"
+          style={{ clipPath: "polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)" }}
+        ></div>
+
+        <div
+          className="absolute -bottom right-30 w-48 h-42 rotate-45 bg-white/10 backdrop-blur-md border border-white/10"
+          style={{ clipPath: "polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)" }}
+        ></div>
+
+        <div className='w-1/4 left-1/3 border-2  absolute bottom-13 opacity-20'></div>
+        <div className='w-1/4 left-1/4 border-2 absolute bottom-10 opacity-20'></div>
+        <div className='w-1/4 left-1/5 border-2 absolute bottom-7 opacity-20'></div>
+
+        {/* --- CONTENT --- */}
+
         <div className="relative z-10 max-w-3xl">
           <h1 className="text-4xl md:text-6xl font-black text-white mb-4 tracking-tighter">
+
             Browse by <span className="">Category.</span>
+
           </h1>
+
           <p className="text-zinc-300 text-lg font-medium max-w-xl">
-            Everything you need to build the next front-page experience. 
+            Everything you need to build the next front-page experience.
             From high-fidelity textures to custom 3D mesh kits.
           </p>
+
         </div>
       </section>
 
+
       {/* --- Categories Grid --- */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-        {categories.map((cat, index) => (
-          <div 
-            key={index} 
+        {allCategories.map((cat, index) => (
+          <div
+            key={index}
             className="group relative cursor-pointer"
           >
-            <div className="h-full bg-white dark:bg-zinc-900 border border-black/5 dark:border-white/10 p-6 rounded-2xl transition-all duration-300 shadow-md group-hover:shadow-xl group-hover:-translate-y-2 group-hover:border-primary/50">
-              
-              {/* Icon Wrap */}
-              <div className={`w-12 h-12 ${cat.color} text-white rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-inherit/20`}>
-                {React.cloneElement(cat.icon, { size: 24 })}
+            <Link href={`/categories/${cat.toLowerCase()}`} passHref>
+            <div className="relative h-full bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-6 rounded-xl shadow-md  transition-all duration-500 group group-hover:shadow-xl overflow-hidden">
+
+              {/* 1. Subtle Grid Background (Visible only on hover) */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.1] dark:group-hover:opacity-[0.07] transition-opacity duration-500 pointer-events-none"
+                style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
               </div>
 
-              {/* Text Info */}
-              <div>
-                <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-1">
-                  {cat.name}
+              {/* 2. Angular "Corner Figure" */}
+              <div className="absolute top-0 right-0 w-16 h-16 pointer-events-none">
+                {/* Main Corner Notch */}
+                <div className="absolute top-0 right-0 w-full h-full bg-zinc-100 dark:bg-zinc-900 rounded-bl-[4rem] transition-transform duration-500 group-hover:scale-110"></div>
+                {/* Accent Line */}
+                <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-primary/40 group-hover:scale-150 transition-transform duration-500"></div>
+              </div>
+
+              {/* 3. Decorative Serial Number (Unique touch) */}
+              <div className="absolute bottom-2 right-3 flex flex-col items-end opacity-20 group-hover:opacity-100 transition-opacity duration-500">
+                <span className="text-[10px] font-mono text-zinc-400">REF-00{index + 1}</span>
+                <div className="w-12 h-[2px] bg-zinc-200 dark:bg-zinc-800 mt-">
+                  <div className="h-full bg-primary w-0 group-hover:w-full transition-all duration-700 delay-100"></div>
+                </div>
+              </div>
+
+              <div className="relative z-10">
+                {/* Category Tag */}
+                <div className="inline-block px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 text-[10px] font-bold text-zinc-500 dark:text-zinc-400 mb-4 tracking-tighter uppercase group-hover:bg-primary group-hover:text-white transition-colors">
+                  Asset Class
+                </div>
+
+                {/* Text Info */}
+                <h3 className="text-2xl font-black text-muted/80 dark:text-zinc-100 mb-2 tracking-tight">
+                  {cat}
                 </h3>
-                <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
-                  {cat.count} Assets Available
+                <p className="text-sm font-medium text-muted-foreground/80 dark:text-zinc-400 leading-tight">
+                  Explore the latest <br /> collection of 100+ items.
                 </p>
-              </div>
 
-              {/* Hover Arrow */}
-              <div className="mt-6 flex items-center text-primary font-bold text-sm opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
-                Explore Library →
+                {/* Simple Interactive Bottom */}
+                <div className="mt-6 flex items-center gap-2 group-hover:gap-4 transition-all duration-300">
+                  <div className="w-6 h-6 rounded-full border border-zinc-400 dark:border-zinc-800 flex items-center justify-center group-hover:border-primary transition-colors">
+                    <span className="text-xs group-hover:text-primary"><ArrowBigRight className='w-4'/></span>
+                  </div>
+                  <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground/60 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">
+                    Enter Category
+                  </span>
+                </div>
               </div>
-
-              {/* Decorative Background ID */}
-              <span className="absolute top-4 right-6 text-4xl font-black text-black/[0.03] dark:text-white/[0.03] pointer-events-none uppercase">
-                {cat.name.split(' ')[0]}
-              </span>
             </div>
+            </Link>
           </div>
         ))}
       </div>
