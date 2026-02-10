@@ -14,7 +14,7 @@ const CategoriesPage = () => {
     <div className="min-h-screen bg-[#FAFAFA] border rounded-3xl dark:bg-zinc-950 p-6 md:p-7 mt-3">
 
       {/* --- Hero Section --- */}
-      <section className="relative w-full rounded-3xl overflow-hidden bg-linear-to-tr from-primary to-secondary py-20 px-10 mb-8 shadow-2xl">
+      <section className="relative w-full rounded-3xl overflow-hidden bg-linear-to-tr from-primary to-secondary py-20 px-10 mb-8 shadow-lg">
 
         <div
           className="absolute top-10 left-10 w-42 h-36 bg-white/10 blur-sm rotate-12"
@@ -33,18 +33,17 @@ const CategoriesPage = () => {
         {/* --- CONTENT --- */}
 
         <div className="relative z-10 max-w-3xl">
-          <h1 className="text-4xl md:text-6xl font-black text-white mb-4 tracking-tighter">
-
-            Browse by <span className="">Category.</span>
-
+          
+          <h1 className="relative text-4xl md:text-6xl font-black mb-2 text-white tracking-tighter uppercase italic leading-none">
+            Browse by Categories
           </h1>
 
-          <p className="text-zinc-300 text-lg font-medium max-w-xl">
+          <p className="text-zinc-300 text-lg leading-6 font-medium max-w-xl">
             Everything you need to build the next front-page experience.
             From high-fidelity textures to custom 3D mesh kits.
           </p>
-
         </div>
+
       </section>
 
 
