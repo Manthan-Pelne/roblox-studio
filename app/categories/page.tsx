@@ -1,8 +1,8 @@
 import { ArrowBigRight } from 'lucide-react';
 import Link from 'next/link';
-import React from 'react';
 
 const CategoriesPage = () => {
+
   const allCategories = [
     "Melee", "Accessories", "Back", "Body Part", "Buildings", "Clothing",
     "Explosive", "Face", "Shirts", "Pants", "Front", "Gear", "Hair",
@@ -22,15 +22,17 @@ const CategoriesPage = () => {
         ></div>
 
         <div
-          className="absolute -bottom right-30 w-48 h-42 rotate-45 bg-white/10 backdrop-blur-md border border-white/10"
+          className="absolute top-20 right-30 w-48 h-42 rotate-45 bg-white/10 backdrop-blur-md border border-white/10"
           style={{ clipPath: "polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)" }}
-        ></div>
+        >
+        </div>
 
-        <div className='w-1/4 left-1/3 border-2  absolute bottom-13 opacity-20'></div>
+        <div className='w-1/4 left-1/3 border-2 absolute bottom-13 opacity-20'></div>
         <div className='w-1/4 left-1/4 border-2 absolute bottom-10 opacity-20'></div>
         <div className='w-1/4 left-1/5 border-2 absolute bottom-7 opacity-20'></div>
 
         {/* --- CONTENT --- */}
+
 
         <div className="relative z-10 max-w-3xl">
           
@@ -42,6 +44,7 @@ const CategoriesPage = () => {
             Everything you need to build the next front-page experience.
             From high-fidelity textures to custom 3D mesh kits.
           </p>
+          
         </div>
 
       </section>

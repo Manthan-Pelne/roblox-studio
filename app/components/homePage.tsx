@@ -59,17 +59,44 @@ const HomePage = () => {
       </div>
 
 
-   <div className='mb-5 mt-7 bg-linear-to-r from-primary/5 to-secondary/20 flex justify-between items-center px-4 py-1 '>
-     <h2 className='text-muted font-bold text-lg italic rounded-sm '>T-Shirts Collection</h2>
-     <Link href="/" className='text-sm cursor-pointer font-semibold '>view more</Link>
+   <div className='mb-5 mt-7 flex justify-between items-center px-4 py-1 '>
+     <div className="">
+          <h2 className="text-2xl font-black tracking-tight text-muted/90">T-shirt Collection</h2>
+          <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em]">Showing 4 Products</p>
+        </div>
+     <Link href="/" className='text-sm cursor-pointer font-semibold '> 
+            <button className="pt-3 pb-2.5 px-6 cursor-pointer rounded-full border border-zinc-400 dark:border-zinc-800 text-[10px] font-black uppercase tracking-widest hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                view more
+            </button>
+      </Link>
    </div>
 
       <ProductCarousel product={product} />
 
-       <h2 className='mb-5 mt-7 text-muted font-bold text-lg italic rounded-sm px-4 py-1 bg-linear-to-r from-primary/5 to-secondary/20'>T-Shirts Collection</h2>
+ <div className='mb-5 mt-7 flex justify-between items-center px-4 py-1 '>
+     <div className="">
+          <h2 className="text-2xl font-black tracking-tight text-muted/90">T-shirt Collection</h2>
+          <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em]">Showing 4 Products</p>
+        </div>
+  <Link href="/" className='text-sm cursor-pointer font-semibold '> 
+            <button className="pt-3 pb-2.5 px-6 cursor-pointer rounded-full border border-zinc-400 dark:border-zinc-800 text-[10px] font-black uppercase tracking-widest hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                view more
+            </button>
+      </Link>
+   </div>
       <ProductCarousel product={product} />
 
-       <h2 className='mb-5 mt-7 text-muted font-bold text-lg italic rounded-sm px-4 py-1 bg-linear-to-r from-primary/5 to-secondary/20'>T-Shirts Collection</h2>
+ <div className='mb-5 mt-7 flex justify-between items-center px-4 py-1 '>
+     <div className="">
+          <h2 className="text-2xl font-black tracking-tight text-muted/90">T-shirt Collection</h2>
+          <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em]">Showing 4 Products</p>
+        </div>
+  <Link href="/" className='text-sm cursor-pointer font-semibold '> 
+            <button className="pt-3 pb-2.5 px-6 cursor-pointer rounded-full border border-zinc-400 dark:border-zinc-800 text-[10px] font-black uppercase tracking-widest hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                view more
+            </button>
+      </Link>
+   </div>
       <ProductCarousel product={product} />
 
 </>

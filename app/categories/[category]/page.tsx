@@ -2,6 +2,7 @@
 import React from 'react';
 import { Download, Copy, ChevronRight, Globe, Zap, ShieldCheck } from 'lucide-react';
 import { useParams } from 'next/navigation';
+import Link from 'next/link';
 
 const CategoryPage = () => {
   const params = useParams();
@@ -69,15 +70,8 @@ const CategoryPage = () => {
   </div>
 </div>
 
-      <div className="mt-12 flex flex-wrap gap-4">
-        <button className="h-14 px-10 bg-black dark:bg-white text-white dark:text-black rounded-full font-black uppercase text-xs tracking-widest hover:scale-105 transition-transform active:scale-95">
-          View Assets
-        </button>
-        <button className="h-14 w-14 flex items-center justify-center border border-zinc-200 dark:border-zinc-800 rounded-full hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors">
-          <Download size={20} />
-        </button>
-      </div>
-    </div>
+
+ </div>
 
     {/* --- 3. RIGHT: THE VISUAL (40% width) --- */}
     <div className="flex-1 bg-zinc-50 dark:bg-zinc-900/50 p-8 flex items-center justify-center relative group">
@@ -132,7 +126,7 @@ const CategoryPage = () => {
       <main className="max-w-full mx-auto mt-5">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {products.map((item) => (
-            <div key={item.id} className="group relative flex flex-col">
+            <Link href={`/categories/${displayName}/${item.name}`} passHref key={item.id} className="group relative flex flex-col">
               {/* Product Frame */}
               <div className="relative rounded-[2rem] bg-zinc-100 dark:bg-zinc-900 overflow-hidden border border-zinc-200 dark:border-zinc-800 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10">
                 <img 
@@ -165,7 +159,7 @@ const CategoryPage = () => {
                   <Copy size={16} />
                 </button>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </main>
