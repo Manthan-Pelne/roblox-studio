@@ -2,7 +2,8 @@
 import React from 'react'
 import Autoplay from "embla-carousel-autoplay";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { Copy, Download } from 'lucide-react';
+import { ArrowUpRight, Copy, Download, Heart } from 'lucide-react';
+import Link from 'next/link';
 
 // Destructure the product array from props
 const ProductCarousel = ({ product}:any) => {
@@ -14,49 +15,63 @@ const ProductCarousel = ({ product}:any) => {
       >
         <CarouselContent className="-ml-4">
           {/* Map through the products array here */}
-          {product.map((item:any) => (
-            <CarouselItem key={item.id} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
-              <div className="group relative bg-white dark:bg-zinc-900 border border-black/15 dark:border-white/10 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+          {product.map((prod:any) => (
+            <CarouselItem key={prod.id} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
+            <Link href={`/categories/${prod.category.toLowerCase()}/${prod.name}`} className="group relative w-full max-w-sm"> 
+              {/* Main Card */}
+              <div className="relative aspect-[4/5] bg-[#F8F9FA] dark:bg-[#0C0C0E] border border-zinc-200 dark:border-zinc-800/50 rounded-[2rem] overflow-hidden transition-all duration-500 hover:ring-1 hover:ring-primary/20">
                 
-                {/* Image Container */}
-                <div className="relative aspect-square overflow-hidden bg-[#f6f5f5] dark:bg-zinc-800">
-                  <img 
-                    src={item.image} 
-                    alt={item.name}
-                    className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
-                  />
-                  {/* Category Badge */}
-                  <div className="absolute top-3 left-3">
-                    <span className="px-2 py-1 text-[10px] font-bold border uppercase tracking-widest bg-white/80 dark:bg-black/80 backdrop-blur-md rounded-md">
-                      {item.category}
-                    </span>
+                {/* Top Bar: Rarity & Stats */}
+                <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-10">
+                   <div className=" h-9 w-9 bg-white dark:bg-zinc-950 rounded-2xl flex items-center justify-center shadow-xl ">
+                        <ArrowUpRight size={18} />
+                     </div>
+                  
+                  <div className="flex gap-2">
+                    <div className="h-9 w-9 bg-secondary/30 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-700/30 rounded-lg flex items-center justify-center text-zinc-500 group-hover:text-primary transition-colors">
+                      <Heart size={16} className='' />
+                    </div>
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="p-4">
-                  <h3 className="font-semibold text-muted text-sm dark:text-zinc-100 truncate">
-                    {item.name}
-                  </h3>
+                {/* Product Image Stage */}
+                <div className="absolute inset-0 flex items-center justify-center p-6">
+                  {/* Subtle Background Glow */}
+                 
                   
-                  {/* Action Buttons */}
-                  <div className="flex items-center gap-2 mt-2">
-                    <button 
-                      title="Download Template"
-                      className="flex-1 flex items-center justify-center gap-2 py-2 text-xs font-bold bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
-                    >
-                      <Download size={14} />
-                      Save
-                    </button>
-                    <button 
-                      title="Copy ID"
-                      className="p-2 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
-                    >
-                      <Copy size={14} />
-                    </button>
+                  <img 
+                    src={prod.image} 
+                    className="relative w-full h-full object-contain  drop-shadow-xl group-hover:scale-110 group-hover:-rotate-3 transition-all duration-700 ease-out" 
+                  />
+                </div>
+
+                {/* Bottom Bento Box Content */}
+                <div className="absolute bottom-3 left-3 right-3">
+                  <div className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border dark:border-zinc-800/40 rounded-[1.5rem] p-4 shadow-xl">
+                    
+                    {/* Title & Price Row */}
+                    <div className="flex justify-between items-center gap-3 w-full">
+                      {/* Wrapper for the name - min-w-0 is the secret ingredient */}
+                      <div className="space-y-0.5 min-w-0 flex-1">
+                        <h4 className="font-bold truncate text-zinc-900 dark:text-zinc-100 tracking-tight leading-tight">
+                          {prod.name}
+                        </h4>
+                      </div>
+
+                      {/* Button Section */}
+                      <div className="flex-shrink-0">
+                        <div className="flex items-center gap-1 bg-zinc-900 dark:bg-zinc-100 px-2.5 py-1 rounded-lg shadow-sm">
+                          <button className="h-6 w-10 flex items-center justify-center rounded-md text-zinc-100 dark:text-zinc-500 cursor-pointer hover:bg-white/10 dark:hover:bg-black/10 transition-colors">
+                            <Copy size={16} />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    
                   </div>
                 </div>
               </div>
+            </Link>
             </CarouselItem>
           ))}
         </CarouselContent>

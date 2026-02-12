@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import { ChevronLeft, Share2, Download, Eye, Copy, Check, ArrowUpRight, Box, ShieldCheck, Zap } from 'lucide-react';
+import { ChevronLeft, Share2, Download, Eye, Copy, Check, ArrowUpRight, Box, ShieldCheck, Zap, Heart } from 'lucide-react';
 
 const ProductDetails = () => {
   const [isDownloading, setIsDownloading] = useState(false);
@@ -150,29 +150,61 @@ const ProductDetails = () => {
             <button className="text-[10px] font-black uppercase tracking-widest text-primary hover:underline">View All</button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-8">
             {products.map((prod) => (
               <div key={prod.id} className="group cursor-pointer">
-                <div className="relative aspect-[4/5] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-[2.5rem] overflow-hidden transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2">
-                  {/* Image Stage */}
-                  <div className="absolute inset-0 p-8 flex items-center justify-center bg-zinc-50 dark:bg-zinc-950/50 group-hover:bg-transparent transition-colors">
-                    <img src={prod.image} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700" />
-                  </div>
+               <div className="relative aspect-[4/5] bg-[#F8F9FA] dark:bg-[#0C0C0E] border border-zinc-200 dark:border-zinc-800/50 rounded-[2rem] overflow-hidden transition-all duration-500 hover:ring-1 hover:ring-primary/20">
+                
+                {/* Top Bar: Rarity & Stats */}
+                <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-10">
+                   <div className=" h-9 w-9 bg-white dark:bg-zinc-950 rounded-2xl flex items-center justify-center shadow-xl ">
+                        <ArrowUpRight size={18} />
+                     </div>
                   
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  
-                  {/* Floating Action */}
-                  <div className="absolute top-6 right-6 h-10 w-10 bg-white dark:bg-zinc-950 rounded-2xl flex items-center justify-center shadow-xl opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all">
-                    <ArrowUpRight size={18} />
-                  </div>
-
-                  {/* Bottom Content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-white dark:from-zinc-900 to-transparent pt-12">
-                     <p className="text-[9px] text-primary font-black uppercase tracking-[0.2em] mb-1">{prod.category}</p>
-                     <h4 className="text-lg font-black uppercase italic tracking-tighter leading-tight">{prod.name}</h4>
+                  <div className="flex gap-2">
+                    <div className="h-9 w-9 bg-secondary/30 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-700/30 rounded-lg flex items-center justify-center text-zinc-500 group-hover:text-primary transition-colors">
+                      <Heart size={16} className='' />
+                    </div>
                   </div>
                 </div>
+
+                {/* Product Image Stage */}
+                <div className="absolute inset-0 flex items-center justify-center p-6">
+                  {/* Subtle Background Glow */}
+                 
+                  
+                  <img 
+                    src={prod.image} 
+                    className="relative w-full h-full object-contain  drop-shadow-xl group-hover:scale-110 group-hover:-rotate-3 transition-all duration-700 ease-out" 
+                  />
+                </div>
+
+                {/* Bottom Bento Box Content */}
+                <div className="absolute bottom-3 left-3 right-3">
+                  <div className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border dark:border-zinc-800/40 rounded-[1.5rem] p-4 shadow-xl">
+                    
+                    {/* Title & Price Row */}
+                   <div className="flex justify-between items-center gap-3 w-full">
+                      {/* Wrapper for the name - min-w-0 is the secret ingredient */}
+                      <div className="space-y-0.5 min-w-0 flex-1">
+                        <h4 className="font-bold truncate text-zinc-900 dark:text-zinc-100 tracking-tight leading-tight">
+                          {prod.name}
+                        </h4>
+                      </div>
+
+                      {/* Button Section */}
+                      <div className="flex-shrink-0">
+                        <div className="flex items-center gap-1 bg-zinc-900 dark:bg-zinc-100 px-2.5 py-1 rounded-lg shadow-sm">
+                          <button className="h-6 w-10 flex items-center justify-center rounded-md text-zinc-100 dark:text-zinc-500 cursor-pointer hover:bg-white/10 dark:hover:bg-black/10 transition-colors">
+                            <Copy size={16} />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
               </div>
             ))}
           </div>
