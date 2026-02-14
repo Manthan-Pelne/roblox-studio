@@ -19,6 +19,7 @@ import {
   Compass,
   Loader2
 } from 'lucide-react';
+import { ThemeToggle } from './themeToggle';
 
 const Header = ({ categories = [] }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -120,21 +121,7 @@ const Header = ({ categories = [] }) => {
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-2">
-            <button
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="p-2 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
-            >
-              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
-
-            <div className="md:hidden flex items-center gap-1">
-              <button onClick={() => setIsSearchOpen(true)} className="p-2 text-zinc-600 dark:text-zinc-300">
-                <Search size={20} />
-              </button>
-              <button onClick={() => setIsMenuOpen(true)} className="p-2 text-zinc-600 dark:text-zinc-300">
-                <Menu size={20} />
-              </button>
-            </div>
+            <ThemeToggle/>
           </div>
         </div>
       </header>

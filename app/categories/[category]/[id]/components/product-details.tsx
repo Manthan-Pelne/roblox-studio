@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import { ChevronLeft, Share2, Download, Eye, Copy, Check, ArrowUpRight, Box, ShieldCheck, Zap, Heart } from 'lucide-react';
+import Link from 'next/link';
 
 const ProductDetails = () => {
   const [isDownloading, setIsDownloading] = useState(false);
@@ -38,37 +39,37 @@ const ProductDetails = () => {
   return (
     <div className="min-h-screen bg-[#FAFAFA] dark:bg-[#050505] p-4 md:p-7 mt-3 rounded-3xl border transition-colors duration-500">
       <main className=" mx-auto space-y-8">
-        
+
 
         {/* --- 2. HERO PRODUCT SECTION --- */}
         <section className="relative overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl shadow-lg">
-            
-            <nav className="flex justify-between items-center max-w-5xl mx-auto my-4">
-          <button className="group flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 hover:text-primary transition-all">
-            <ChevronLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-            Return to Store
-          </button>
-          <div className="flex items-center gap-4 text-zinc-400">
-             <span className="text-[9px] font-bold uppercase tracking-widest border-r pr-4 border-zinc-200 dark:border-zinc-800">Verified Asset</span>
-             <Box size={16} />
-          </div>
-           </nav>
 
-          <div className="flex flex-col lg:flex-row items-stretch">  
+          <nav className="flex justify-between items-center max-w-5xl mx-auto my-4">
+            <button className="group flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 hover:text-primary transition-all">
+              <ChevronLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
+              Return to Store
+            </button>
+            <div className="flex items-center gap-4 text-zinc-400">
+              <span className="text-[9px] font-bold uppercase tracking-widest border-r pr-4 border-zinc-200 dark:border-zinc-800">Verified Asset</span>
+              <Box size={16} />
+            </div>
+          </nav>
+
+          <div className="flex flex-col lg:flex-row items-stretch">
             {/* LARGE IMAGE PREVIEW */}
             <div className="flex-1 p-8 flex items-center justify-center bg-zinc-50 dark:bg-zinc-950/50 relative overflow-hidden">
-               {/* Watermark */}
-               <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03]">
-                  <h2 className="text-[10vw] font-black uppercase">STUDIO</h2>
-               </div>
-               
-               <div className="relative group w-full aspect-square max-w-[300px]">
-                  <img 
-                    src={mainProduct.image} 
-                    className="relative z-10 w-full h-full object-contain drop-shadow-2xl group-hover:scale-105 transition-transform duration-700" 
-                    alt={mainProduct.name} 
-                  />
-               </div>
+              {/* Watermark */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03]">
+                <h2 className="text-[10vw] font-black uppercase">STUDIO</h2>
+              </div>
+
+              <div className="relative group w-full aspect-square max-w-[300px]">
+                <img
+                  src={mainProduct.image}
+                  className="relative z-10 w-full h-full object-contain drop-shadow-2xl group-hover:scale-105 transition-transform duration-700"
+                  alt={mainProduct.name}
+                />
+              </div>
             </div>
 
 
@@ -76,7 +77,7 @@ const ProductDetails = () => {
             <div className="flex-1 p-8 flex flex-col justify-center">
               <div className="space-y-2 mb-8">
                 <div className="flex items-center gap-2 text-primary font-black text-[10px] uppercase tracking-[0.4em]">
-                   <Zap size={12} fill="currentColor" /> Premium Template
+                  <Zap size={12} fill="currentColor" /> Premium Template
                 </div>
                 <h1 className="text-5xl font-black tracking-tighter uppercase italic leading-[0.85]">
                   {mainProduct.name}<br />
@@ -93,50 +94,51 @@ const ProductDetails = () => {
               </div>
 
               {/* CODE INTERACTION */}
-              <div className="flex items-center gap-4 p-2 pl-6 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl mb-3 group">
-                <p className="flex-1 text-sm font-bold tracking-widest uppercase">
-                  <span className="text-primary/50 mr-4 font-black">ID</span>
-                  <span className="font-mono text-zinc-600 dark:text-zinc-300">{mainProduct.code}</span>
-                </p>
-                <button 
-                  onClick={() => handleCopy(mainProduct.code)}
-                  className="h-12 w-12 flex items-center justify-center bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:text-primary transition-all active:scale-90"
-                >
-                  {copied ? <Check size={18} className="text-green-500" /> : <Copy size={18} />}
-                </button>
+              <div className='flex items-center gap-10 justify-between'>
+                <div className="flex items-center gap-4 p-2 pl-6 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl group">
+                  <p className="flex-1 text-sm font-bold tracking-widest uppercase">
+                    <span className="text-primary/50 mr-4 font-black">ID</span>
+                    <span className="font-mono text-zinc-600 dark:text-zinc-300">{mainProduct.code}</span>
+                  </p>
+                  <button
+                    onClick={() => handleCopy(mainProduct.code)}
+                    className="h-12 w-12 flex items-center justify-center bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:text-primary transition-all active:scale-90"
+                  >
+                    {copied ? <Check size={18} className="text-green-500" /> : <Copy size={18} />}
+                  </button>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <button
+                    onClick={handleDownload}
+                    disabled={isDownloading}
+                    className="flex-[2] w-[250px] h-16 bg-primary text-white rounded-[1.25rem] font-black uppercase text-xs tracking-[0.2em] shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                  >
+                    <Download size={18} />
+                    {isDownloading ? 'Downloading...' : 'Download'}
+                  </button>
+                  <button className="flex-1 h-16 border border-zinc-200  dark:border-zinc-800 rounded-[1.25rem] flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all">
+                    <Share2 size={20} />
+                  </button>
+                </div>
               </div>
 
-              {/* ACTION BUTTONS */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <button 
-                  onClick={handleDownload}
-                  disabled={isDownloading}
-                  className="flex-[2] h-16 bg-primary text-white rounded-[1.25rem] font-black uppercase text-xs tracking-[0.2em] shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
-                >
-                  <Download size={18} />
-                  {isDownloading ? 'Downloading...' : 'Download Asset'}
-                </button>
-                <button className="flex-1 h-16 border border-zinc-200 dark:border-zinc-800 rounded-[1.25rem] flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all">
-                  <Share2 size={20} />
-                </button>
-              </div>
 
               {/* FOOTER STATS */}
               <div className="flex items-center gap-10 mt-4 border-t border-zinc-100 dark:border-zinc-800 pt-8">
-                 <div className="flex flex-col">
-                    <span className="text-[9px] font-black text-zinc-400 uppercase tracking-widest">Views</span>
-                    <span className="text-lg font-black italic">{mainProduct.views}</span>
-                 </div>
-                 <div className="flex flex-col">
-                    <span className="text-[9px] font-black text-zinc-400 uppercase tracking-widest">Saved</span>
-                    <span className="text-lg font-black italic">{mainProduct.downloads}</span>
-                 </div>
-                 <div className="flex flex-col">
-                    <span className="text-[9px] font-black text-zinc-400 uppercase tracking-widest">Status</span>
-                    <span className="text-[10px] font-black text-green-500 uppercase flex items-center gap-1">
-                       <ShieldCheck size={12} /> Optimized
-                    </span>
-                 </div>
+                <div className="flex flex-col">
+                  <span className="text-[9px] font-black text-zinc-400 uppercase tracking-widest">Views</span>
+                  <span className="text-lg font-black italic">{mainProduct.views}</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[9px] font-black text-zinc-400 uppercase tracking-widest">Saved</span>
+                  <span className="text-lg font-black italic">{mainProduct.downloads}</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[9px] font-black text-zinc-400 uppercase tracking-widest">Status</span>
+                  <span className="text-[10px] font-black text-green-500 uppercase flex items-center gap-1">
+                    <ShieldCheck size={12} /> Optimized
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -150,62 +152,54 @@ const ProductDetails = () => {
             <button className="text-[10px] font-black uppercase tracking-widest text-primary hover:underline">View All</button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5  gap-3">
             {products.map((prod) => (
-              <div key={prod.id} className="group cursor-pointer">
-               <div className="relative aspect-[4/5] bg-[#F8F9FA] dark:bg-[#0C0C0E] border border-zinc-200 dark:border-zinc-800/50 rounded-[2rem] overflow-hidden transition-all duration-500 hover:ring-1 hover:ring-primary/20">
-                
-                {/* Top Bar: Rarity & Stats */}
-                <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-10">
-                   <div className=" h-9 w-9 bg-white dark:bg-zinc-950 rounded-2xl flex items-center justify-center shadow-xl ">
-                        <ArrowUpRight size={18} />
+              <Link href={`/categories/${prod.category.toLowerCase()}/${prod.name.toLowerCase()}`} key={prod.id} className="group flex flex-col h-full bg-white dark:bg-[#110e0c] rounded-[2rem] border border-black/5 dark:border-white/5 p-2 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(228,81,55,0.1)] hover:-translate-y-1">
+
+                {/* The Image Stage - Normalizing small/big images */}
+                <div className="relative flex-shrink-0 flex items-center justify-center bg-[#F8F9FA] dark:bg-[#1a1614] rounded-[1.5rem] overflow-hidden h-[230px] w-full border border-black/[0.03] dark:border-white/[0.03]">
+
+                  {/* Top Badges (Stats) */}
+                  <div className="absolute top-2 left-4 right-4 flex justify-between items-start z-10">
+                    <div className=" h-9 w-9 bg-white  dark:bg-zinc-950 rounded-2xl flex items-center justify-center shadow-xl ">
+                       <ArrowUpRight size={18} />
                      </div>
-                  
-                  <div className="flex gap-2">
-                    <div className="h-9 w-9 bg-secondary/30 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-700/30 rounded-lg flex items-center justify-center text-zinc-500 group-hover:text-primary transition-colors">
-                      <Heart size={16} className='' />
-                    </div>
+
+                    <button className="h-9 w-9 bg-white/90 dark:bg-black/50 backdrop-blur-md border border-black/5 rounded-xl flex items-center justify-center text-zinc-400 hover:text-[#E45137] transition-all">
+                      <Heart size={16} />
+                    </button>
+                  </div>
+
+                  {/* Product Image - Scaled to fit stage */}
+                  <div className="relative w-full h-full flex items-center justify-center p-4 transition-transform duration-700 ease-out group-hover:scale-110">
+                    <img
+                      src={prod.image}
+                      alt={prod.name}
+                      className=" w-48 object-contain drop-shadow-[0_15px_30px_rgb(214,255,231)] dark:drop-shadow-[0_15px_30px_rgba(0,0,0,0.5)]"
+                    />
                   </div>
                 </div>
 
-                {/* Product Image Stage */}
-                <div className="absolute inset-0 flex items-center justify-center p-6">
-                  {/* Subtle Background Glow */}
-                 
-                  
-                  <img 
-                    src={prod.image} 
-                    className="relative w-full h-full object-contain  drop-shadow-xl group-hover:scale-110 group-hover:-rotate-3 transition-all duration-700 ease-out" 
-                  />
-                </div>
+                {/* Content Section */}
+                <div className="flex justify-between items-center gap-3 w-full p-3 mt-2 rounded-3xl shadow border  bg-[gray]/5">
+                  {/* Wrapper for the name - min-w-0 is the secret ingredient */}
+                  <div className="space-y-0.5 min-w-0 flex-1">
+                    <p className='text-xs font-black italic uppercase text-primary'>{prod.category}</p>
+                    <h4 className="font-bold truncate text-muted dark:text-zinc-100 tracking-tight leading-tight">
+                      {prod.name}
+                    </h4>
+                  </div>
 
-                {/* Bottom Bento Box Content */}
-                <div className="absolute bottom-3 left-3 right-3">
-                  <div className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border dark:border-zinc-800/40 rounded-[1.5rem] p-4 shadow-xl">
-                    
-                    {/* Title & Price Row */}
-                   <div className="flex justify-between items-center gap-3 w-full">
-                      {/* Wrapper for the name - min-w-0 is the secret ingredient */}
-                      <div className="space-y-0.5 min-w-0 flex-1">
-                        <h4 className="font-bold truncate text-zinc-900 dark:text-zinc-100 tracking-tight leading-tight">
-                          {prod.name}
-                        </h4>
-                      </div>
-
-                      {/* Button Section */}
-                      <div className="flex-shrink-0">
-                        <div className="flex items-center gap-1 bg-zinc-900 dark:bg-zinc-100 px-2.5 py-1 rounded-lg shadow-sm">
-                          <button className="h-6 w-10 flex items-center justify-center rounded-md text-zinc-100 dark:text-zinc-500 cursor-pointer hover:bg-white/10 dark:hover:bg-black/10 transition-colors">
-                            <Copy size={16} />
-                          </button>
-                        </div>
-                      </div>
+                  {/* Button Section */}
+                  <div className="flex-shrink-0">
+                    <div className="flex items-center gap-1 bg-zinc-900 dark:bg-zinc-100 hover:bg-black/80 dark:hover:bg-black/10 transition-all duration-200 px-2.5 py-1 rounded-lg shadow-sm">
+                      <button className="h-6 w-10 flex items-center justify-center rounded-md text-zinc-100 dark:text-zinc-500 cursor-pointer">
+                        <Copy size={16} />
+                      </button>
                     </div>
-                    
                   </div>
                 </div>
-              </div>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
