@@ -39,13 +39,17 @@ export default function RootLayout({
         >
         <SidebarProvider>
           <AppSidebar/>
-          <SidebarTrigger/>
-          <section className="w-full pr-">
-          <Header/>  
-          <main className="pr-5">
-        {children}  
-            </main>         
-          </section>
+       
+     {/* Wrap content in a div that handles the remaining width */}
+  <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
+    <div className="flex items-center px-4 py- border-b">
+       <SidebarTrigger />
+       <Header /> 
+    </div>
+    <main className="flex-1 overflow-y-auto px-4 md:px-6 py-4">
+      {children}
+    </main>
+  </div>
         </SidebarProvider>
         </ThemeProvider>
       </body>

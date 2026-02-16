@@ -1,8 +1,8 @@
-import Image from "next/image";
+
 import HomePage from "./components/homePage";
 
-export default function Home() {
+export default function Home({ searchParams }: { searchParams: any }){
   return (
-    <HomePage/>
+    <HomePage searchParams={searchParams}/>
   );
 }

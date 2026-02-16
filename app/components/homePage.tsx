@@ -2,22 +2,40 @@
 import { TextAnimate } from '@/components/ui/text-animate';
 import ProductCarousel from './productCarousel';
 import Link from 'next/link';
+import { GetHomePageData } from '../actions/cardAction';
+import ProductCard from './productCard';
 
-const HomePage = () => {
 
-  const product = [
-    { id: 1, name: "Cyberpunk Vest", category: "Shirts", image: "/1758785091458-TRASHER.png" },
-    { id: 2, name: "Y2K Baggies", category: "Pants", image: "/1758793362119-group.png" },
-    { id: 3, name: "Anime Katana", category: "Accessory", image: "/1758785091458-TRASHER.png" },
-    { id: 4, name: "Streetwear Hoodie", category: "Shirts", image: "/1758793362119-group.png" },
-    { id: 5, name: "Tactical Cargo", category: "Pants", image: "/1758785091458-TRASHER.png" },
-    { id: 6, name: "Gothic Corset", category: "Shirts", image: "/1758793362119-group.png" },
-    { id: 7, name: "Neon Sneakers", category: "Shoes", image: "/1758785091458-TRASHER.png" },
-    { id: 8, name: "Royal Cape", category: "Back", image: "/1758793362119-group.png" },
-  ];
+const CategorySection = ({ title, count, cards }: any) => (
+  <div className="w-full">
+    <div className='mb-5 mt-7 flex justify-between items-center px-4 py-1'>
+      <div>
+        <h2 className="text-2xl font-black tracking-tight text-muted/90">{title}</h2>
+        <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em]">
+          Showing {count} Products
+        </p>
+      </div>
+      <Link href={`/categories/${title.toLowerCase()}`}>
+        <button className="pt-3 pb-2.5 px-6 cursor-pointer rounded-full border border-zinc-400 dark:border-zinc-800 text-[10px] font-black uppercase tracking-widest hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+          view more
+        </button>
+      </Link>
+    </div>
+    <ProductCarousel cards={cards} />
+  </div>
+)
 
+
+const HomePage = async({ searchParams }: { searchParams: Promise<{ page?: string }>}) => {
+
+// Get the page number from the URL (defaults to 1)
+const params = await searchParams;
+  const page = parseInt(params.page || '1');
+  
+  // Fetch ALL the data needed for the landing page
+  const data = await GetHomePageData(page);
+   console.log("data",data)
   return (
-
 <>
       <div className="relative w-full h-max mx-auto mt-2 overflow-hidden rounded-3xl border border-black/5 dark:border-white/10 shadow-md dark:bg-zinc-900">
         
@@ -59,48 +77,38 @@ const HomePage = () => {
       </div>
 
 
-   <div className='mb-5 mt-7 flex justify-between items-center px-4 py-1 '>
-     <div className="">
-          <h2 className="text-2xl font-black tracking-tight text-muted/90">T-shirt Collection</h2>
-          <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em]">Showing 4 Products</p>
-        </div>
-     <Link href="/categories/" className='text-sm cursor-pointer font-semibold '> 
-            <button className="pt-3 pb-2.5 px-6 cursor-pointer rounded-full border border-zinc-400 dark:border-zinc-800 text-[10px] font-black uppercase tracking-widest hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
-                view more
-            </button>
-      </Link>
-   </div>
+      {data.tshirt.length > 0 && (
+        <CategorySection 
+          title="T-shirts" 
+          cards={data.tshirt} 
+          count={data.tshirt.length} 
+        />
+      )}
 
-      <ProductCarousel product={product} />
+      {data.shirt.length > 0 && (
+        <CategorySection 
+          title="Shirts" 
+          cards={data.shirt} 
+          count={data.shirt.length} 
+        />
+      )}
 
- <div className='mb-5 mt-10 flex justify-between items-center px-4 py-1 '>
-     <div className="">
-          <h2 className="text-2xl font-black tracking-tight text-muted/90">T-shirt Collection</h2>
-          <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em]">Showing 4 Products</p>
-        </div>
-  <Link href="/categories/" className='text-sm cursor-pointer font-semibold '> 
-            <button className="pt-3 pb-2.5 px-6 cursor-pointer rounded-full border border-zinc-400 dark:border-zinc-800 text-[10px] font-black uppercase tracking-widest hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
-                view more
-            </button>
-      </Link>
-   </div>
+         {data.pant.length > 0 && (
+        <CategorySection 
+          title="Pants" 
+          cards={data.pant} 
+          count={data.pant.length} 
+        />
+      )}
 
-      <ProductCarousel product={product} />
 
- <div className='mb-5 mt-7 flex justify-between items-center px-4 py-1 '>
-     <div className="">
-          <h2 className="text-2xl font-black tracking-tight text-muted/90">T-shirt Collection</h2>
-          <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em]">Showing 4 Products</p>
-        </div>
-  <Link href="/categories/" className='text-sm cursor-pointer font-semibold '> 
-            <button className="pt-3 pb-2.5 px-6 cursor-pointer rounded-full border border-zinc-400 dark:border-zinc-800 text-[10px] font-black uppercase tracking-widest hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
-                view more
-            </button>
-      </Link>
-   </div>
-      <ProductCarousel product={product} />
 
+      <div className='mt-20'>
+        <h2 className="text-4xl text-center mb-5 font-black tracking-tight text-muted/90">Most Downloads</h2>
+       <ProductCard prod={data.mostdownloads}/>
+      </div>
 </>
+
   );
 };
 
