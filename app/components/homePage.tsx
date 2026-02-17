@@ -8,7 +8,7 @@ import ProductCard from './productCard';
 
 const CategorySection = ({ title, count, cards }: any) => (
   <div className="w-full">
-    <div className='mb-5 mt-7 flex justify-between items-center px-4 py-1'>
+    <div className='mb-5  flex justify-between items-center px-4 py-1'>
       <div>
         <h2 className="text-2xl font-black tracking-tight text-muted/90">{title}</h2>
         <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em]">
@@ -34,7 +34,7 @@ const params = await searchParams;
   
   // Fetch ALL the data needed for the landing page
   const data = await GetHomePageData(page);
-   console.log("data",data)
+ 
   return (
 <>
       <div className="relative w-full h-max mx-auto mt-2 overflow-hidden rounded-3xl border border-black/5 dark:border-white/10 shadow-md dark:bg-zinc-900">
@@ -105,7 +105,7 @@ const params = await searchParams;
 
       <div className='mt-20'>
         <h2 className="text-4xl text-center mb-5 font-black tracking-tight text-muted/90">Most Downloads</h2>
-       <ProductCard prod={data.mostdownloads}/>
+       <ProductCard href="categories" prod={data.mostdownloads}/>
       </div>
 </>
 

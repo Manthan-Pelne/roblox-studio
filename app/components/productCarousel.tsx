@@ -7,7 +7,6 @@ import Link from 'next/link';
 
 // Destructure the product array from props
 const ProductCarousel = ({ cards}:any) => {
-console.log("card",cards)
   return (
     <div className="w-full max-w-full px-4 flex justify-center">
       <Carousel
@@ -36,8 +35,8 @@ console.log("card",cards)
                   {/* Product Image - Scaled to fit stage */}
                   <div className="relative w-full h-full flex items-center justify-center p-4 transition-transform duration-700 ease-out group-hover:scale-110">
                     <img
-                   src={`${prod.image.key}`} 
-        alt={prod.name}
+                 src={`${process.env.NEXT_PUBLIC_R2_CDN_URL}/${prod.image.key}`}
+                 alt={prod.name}
                       className=" w-48 object-contain drop-shadow-[0_15px_30px_rgb(214,255,231)] dark:drop-shadow-[0_15px_30px_rgba(0,0,0,0.5)]"
                     />
                   </div>

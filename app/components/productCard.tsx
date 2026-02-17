@@ -1,17 +1,21 @@
+"use client"
 import Link from 'next/link'
 import { ArrowUpRight, Copy, Heart } from 'lucide-react'
 import Image from 'next/image' // Always use Next.js Image
+import { useParams } from 'next/navigation';
 
-const ProductCard = ({ prod }: any) => {
+const ProductCard = ({ prod, href }: any) => {
   // 1. Logic check: If 'prod' is the array from your MongoDB action
   if (!prod || prod.length === 0) return <p>No products found.</p>;
+  const params = useParams
+  console.log("params",params)
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {prod.map((item: any) => (
         <Link 
           key={item._id} // Required for React list rendering
-          href={`/card/${item.slug}`} // Link to the dynamic details page
+          href={`/${href}/${item.category?.title?.toLowerCase()}/${item.slug}`}
           className="group flex flex-col h-full bg-white dark:bg-[#110e0c] rounded-[2rem] border border-black/5 dark:border-white/5 p-2 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(228,81,55,0.1)] hover:-translate-y-1"
         >
           {/* The Image Stage */}
@@ -30,7 +34,7 @@ const ProductCard = ({ prod }: any) => {
             {/* Product Image */}
             <div className="relative w-full h-full flex items-center justify-center p-4 transition-transform duration-700 ease-out group-hover:scale-110">
               <img
-                src={item.image?.url || item.image} // Handles object or string
+                src={`${process.env.NEXT_PUBLIC_R2_CDN_URL}/${item.image.key}`} // Handles object or string
                 alt={item.name}
                 className="w-48 object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.1)] dark:drop-shadow-[0_15px_30px_rgba(0,0,0,0.5)]"
               />
@@ -41,7 +45,7 @@ const ProductCard = ({ prod }: any) => {
           <div className="flex justify-between items-center gap-3 w-full p-3 mt-2 rounded-3xl shadow border bg-[gray]/5">
             <div className="space-y-0.5 min-w-0 flex-1">
               <p className='text-xs font-black italic uppercase text-primary'>
-                {item.category?.title || "Asset"}
+                {item.category?.title}
               </p>
               <h4 className="font-bold truncate text-muted dark:text-zinc-100 tracking-tight leading-tight">
                 {item.name}

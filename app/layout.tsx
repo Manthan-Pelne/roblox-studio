@@ -42,7 +42,7 @@ export default function RootLayout({
        
      {/* Wrap content in a div that handles the remaining width */}
   <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
-    <div className="flex items-center px-4 py- border-b">
+    <div className="flex items-center px-4">
        <SidebarTrigger />
        <Header /> 
     </div>

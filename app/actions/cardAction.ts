@@ -52,16 +52,29 @@ export async function GetHomePageData(page: number = 1) {
 
 //single card for product details 
 
-export async function getSingleCard(slug: string) {
+export async function getSingleCard(identifier: string) {
   await connectDB();
   
-  const card = await Card.findOne({ slug }).populate("category").lean();
-  if (!card) return null;
+  // Search for the identifier in BOTH the slug and name fields
+  const card = await Card.findOne({
+    $or: [
+      { slug: identifier },
+      { name: identifier }
+    ]
+  }).populate("category").lean();
 
-  // Increment views (equivalent to your FindByIdAndUpdate)
+  if (!card) {
+    console.log("No card found in DB for identifier:", identifier);
+    return null;
+  }
+
+  // Increment views
   await Card.findByIdAndUpdate(card._id, { $inc: { viewcount: 1 } });
 
-  const relatedCards = await Card.find({ category: card.category?._id }).limit(10).lean();
+  const relatedCards = await Card.find({ 
+    category: card.category?._id,
+    _id: { $ne: card._id } // Don't show the current card in 'related'
+  }).populate("category").limit(10).lean();
 
   return {
     template: JSON.parse(JSON.stringify(card)),
