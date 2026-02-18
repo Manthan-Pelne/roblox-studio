@@ -7,7 +7,7 @@ import Category from "../models/category";
 
 export async function GetHomePageData(page: number = 1) {
   await connectDB();
-  const limit = 6;
+  const limit = 20;
   const skip = (page - 1) * limit;
 
   // Promise.all runs these in parallel (faster than your original sequential awaits)
@@ -45,6 +45,7 @@ export async function GetHomePageData(page: number = 1) {
     pant: JSON.parse(JSON.stringify(pant)),
     mostdownloads: JSON.parse(JSON.stringify(mostdownloads)),
     totalPages: Math.ceil(totalCards / limit),
+    totalCount:totalCards,
     currentPage: page
   };
 }

@@ -37,7 +37,7 @@ const params = await searchParams;
  
   return (
 <>
-      <div className="relative w-full h-max mx-auto mt-2 overflow-hidden rounded-3xl border border-black/5 dark:border-white/10 shadow-md dark:bg-zinc-900">
+      <div className="relative w-full h-max mx-auto mb-10 overflow-hidden rounded-3xl border border-black/5 dark:border-white/10 shadow-md dark:bg-zinc-900">
         
         {/* Decorative Background Elements */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">

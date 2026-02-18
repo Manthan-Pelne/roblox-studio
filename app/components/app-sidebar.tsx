@@ -44,7 +44,7 @@ export function AppSidebar() {
         {/* 2. Main Navigation Group */}
         <SidebarGroup>
           <SidebarGroupLabel className="group-data-[collapsible=icon]:hidden text-base">Navigation</SidebarGroupLabel>
-          <SidebarMenu className="font-medium text-muted-foreground hover:text-foreground">
+          <SidebarMenu className="font-medium text-muted-foreground">
             <SidebarMenuItem>
               <SidebarMenuButton tooltip="Home">
                 <Home /> <span>Home</span>
@@ -52,7 +52,7 @@ export function AppSidebar() {
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton tooltip="Explore">
-                <Compass /> <span>Explore</span>
+                <Compass /> <Link href="/explore">Explore</Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
