@@ -1,7 +1,6 @@
 "use client"
 import React, { useState } from 'react';
 import { ChevronLeft, Box, Zap, ShieldCheck, Copy, Check, Download, Heart, ArrowUpRight } from 'lucide-react';
-import Link from 'next/link';
 import ProductCard from '@/app/components/productCard';
 
 const ProductDetailsPage = ({ initialProduct, relatedProducts }: any) => {
@@ -17,10 +16,10 @@ const ProductDetailsPage = ({ initialProduct, relatedProducts }: any) => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-   console.log("initil",relatedProducts)
+   //console.log("initil",relatedProducts)
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] dark:bg-[#050505] p-4 md:p-7 mt-3 rounded-3xl border">
+    <div className="min-h-screen bg-[#FAFAFA] dark:bg-[#050505] p-4 md:p-7  rounded-3xl border">
       <main className="mx-auto space-y-8">
         
         {/* --- HERO SECTION --- */}
@@ -28,9 +27,11 @@ const ProductDetailsPage = ({ initialProduct, relatedProducts }: any) => {
           <div className="flex flex-col lg:flex-row items-stretch">
             {/* Image Side */}
             <div className="flex-1 p-8 flex items-center justify-center bg-zinc-50 dark:bg-zinc-950/50 relative overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03]">
-                <h2 className="text-[10vw] font-black uppercase">STUDIO</h2>
-              </div>
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03] overflow-hidden">
+              <h2 className="text-5xl md:text-[6vw] font-black uppercase whitespace-nowrap">
+                {initialProduct.name}
+              </h2>
+            </div>
               <img 
                 src={getImgUrl(initialProduct.image.key)} 
                 alt={initialProduct.name}
@@ -44,7 +45,7 @@ const ProductDetailsPage = ({ initialProduct, relatedProducts }: any) => {
                 <div className="flex items-center gap-2 text-primary font-black text-[10px] uppercase tracking-[0.4em]">
                   <Zap size={12} fill="currentColor" /> Premium Template
                 </div>
-                <h1 className="text-5xl font-black tracking-tighter uppercase italic leading-[0.85]">
+                <h1 className="text-5xl xl:text-6xl font-black tracking-tighter uppercase italic leading-[0.85]">
                   {initialProduct.name}<br />
                   <span className="text-zinc-300 dark:text-zinc-700">Studio.</span>
                 </h1>

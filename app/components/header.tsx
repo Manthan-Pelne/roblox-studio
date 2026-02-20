@@ -20,50 +20,35 @@ import {
   Loader2
 } from 'lucide-react';
 import { ThemeToggle } from './themeToggle';
+import { SearchResultCard } from './searchResultCard';
+import { searchCards } from '../actions/searchAction';
 
 const Header = ({ categories = [] }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
-  const { theme, setTheme } = useTheme();
 
   // Handle Search Logic
-  const handleSearch = useCallback(async (query: string) => {
-    if (!query) {
-      setSearchResults("");
-      return;
-    }
-    setIsSearching(true);
-    try {
-      const response = await fetch(`/search-query/?q=${encodeURIComponent(query)}`);
-      const html = await response.text();
-      setSearchResults(html);
-    } catch (error) {
-      console.error("Search fetch failed", error);
-    } finally {
-      setIsSearching(false);
-    }
-  }, []);
+useEffect(() => {
+    const delayDebounceFn = setTimeout(async () => {
+      if (searchQuery.length >= 2) {
+        setIsSearching(true);
+        const results = await searchCards(searchQuery);
+        setSearchResults(results);
+        setIsSearching(false);
+      } else {
+        setSearchResults([]);
+      }
+    }, 400); // 400ms is usually the sweet spot for UX
 
-  // Debounce effect
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (searchQuery) handleSearch(searchQuery);
-    }, 600);
-    return () => clearTimeout(timer);
-  }, [searchQuery, handleSearch]);
-
-  const closeSearch = () => {
-    setIsSearchOpen(false);
-    setSearchQuery("");
-    setSearchResults("");
-  };
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchQuery]);
 
   return (
     <>
-      <header className=" px-5 py-3 sticky top-0 bg-white w-full dark:bg-zinc-900 z-20">
+      <header className=" px-5 py-3 sticky top-0 bg-white w-full dark:bg-transparent z-20">
         <div className="flex items-center gap-2 justify-between">
           
           {/* Mobile Logo */}
@@ -79,45 +64,50 @@ const Header = ({ categories = [] }) => {
           {/* Desktop Left Actions */}
          <div></div>
 
-          {/* Search Bar - Desktop & Mobile Slide-in */}
-          <div className={`
-            fixed top-0 left-0 w-full z-[100] p-2 md:p-0 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md transition-transform duration-300
-            md:static md:translate-x-0 md:bg-transparent md:max-w-md md:mx-8
-            ${isSearchOpen ? 'translate-x-0' : '-translate-x-full'}
-          `}>
-            <div className="w-full relative">
-              <div className="relative flex items-center bg-white dark:bg-zinc-800 rounded-full border border-zinc-200 dark:border-zinc-700 hover:shadow-md transition-shadow">
-                <input 
-                  type="text" 
-                  placeholder="Search assets..." 
-                  className="w-full py-2 px-6 bg-transparent rounded-full focus:outline-none dark:text-white"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                <button className="hidden md:flex absolute right-2 p-1.5 bg-primary text-white rounded-full">
-                  <Search size={16} />
-                </button>
-                <button onClick={closeSearch} className="md:hidden absolute right-2 p-1.5 bg-primary text-white rounded-full">
-                  <X size={16} />
-                </button>
-              </div>
-
-              {/* Search Results Dropdown */}
-              {searchQuery && (
-                <div className="absolute left-0 mt-2 w-full max-h-96 overflow-y-auto bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-2xl shadow-2xl z-50">
-                  <div className="p-4">
-                    {isSearching ? (
-                      <div className="flex items-center justify-center py-4 gap-2 text-sm text-zinc-500">
-                        <Loader2 className="animate-spin" size={18} /> Searching...
-                      </div>
-                    ) : (
-                      <div dangerouslySetInnerHTML={{ __html: searchResults }} />
-                    )}
-                  </div>
-                </div>
-              )}
-            </div>
+       {/* Desktop Search Wrapper */}
+        <div className="relative w-full max-w-md mx-auto mt-1">
+          <div className="relative flex items-center bg-[#f8f4f4] dark:bg-zinc-800 rounded-full border focus-within:border-secondary dark:focus-within:border-secondary/70 active:shadow focus-within:shadow transition-all duration-200">
+            <Search size={18} className="ml-4 text-zinc-400" />
+            <input 
+              type="text" 
+              placeholder="Search assets..." 
+              className="w-full py-2 px-3 bg-transparent font-semibold placeholder:font-black placeholder:italic focus:outline-none placeholder:text-muted-foreground/50 dark:text-white"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            {searchQuery && (
+              <button onClick={() => setSearchQuery("")} className="mr-2 p-1">
+                <X size={14} className="text-zinc-400" />
+              </button>
+            )}
           </div>
+
+          {/* Results Dropdown */}
+          {searchQuery.length >= 2 && (
+            <div className="absolute top-full left-0 mt-2 w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-xl overflow-hidden z-[100]">
+              <div className="p-2 max-h-[400px] overflow-y-auto">
+                {isSearching ? (
+                  <div className="flex items-center justify-center py-8 text-zinc-500 gap-2">
+                    <Loader2 className="animate-spin" size={20} />
+                    <span className="text-sm">Searching...</span>
+                  </div>
+                ) : searchResults.length > 0 ? (
+                  searchResults.map((card: any) => (
+                    <SearchResultCard
+                      key={card._id} 
+                      card={card} 
+                      onClick={() => setSearchQuery("")} 
+                    />
+                  ))
+                ) : (
+                  <div className="py-8 text-center text-sm text-zinc-500">
+                    No assets found for "{searchQuery}"
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-2">

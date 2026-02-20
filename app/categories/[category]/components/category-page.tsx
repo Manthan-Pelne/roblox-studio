@@ -10,7 +10,7 @@ const CategoryDetailsPage = ({ initialProducts, categoryName }: any) => {
 const displayName = categoryName ? categoryName.replace(/-/g, ' ') : "Category";
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] border rounded-3xl dark:bg-zinc-950 p-6 md:p-7 mt-3">
+    <div className="min-h-screen bg-[#FAFAFA] border rounded-3xl dark:bg-zinc-950 p-6 md:p-7">
       
       {/* --- 1. BOUNDED HERO SECTION --- */}
      <section className="relative w-full bg-white dark:bg-[#050505] shadow-md overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800">

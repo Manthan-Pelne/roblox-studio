@@ -11,10 +11,10 @@ const CategoriesPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] border rounded-3xl dark:bg-zinc-950 p-6 md:p-7 mt-3">
+    <div className="min-h-screen bg-[#FAFAFA] border rounded-3xl dark:bg-zinc-950 p-6 md:p-7 ">
 
       {/* --- Hero Section --- */}
-      <section className="relative w-full rounded-3xl overflow-hidden bg-linear-to-tr from-primary to-secondary py-20 px-10 mb-8 shadow-lg">
+      <section className="relative w-full rounded-3xl overflow-hidden bg-linear-to-tr from-primary to-secondary dark:bg-linear-to-tr dark:from-primary/20 dark:to-secondary/80 py-20 px-10 mb-8 shadow-lg">
 
         <div
           className="absolute top-10 left-10 w-42 h-36 bg-white/10 blur-sm rotate-12"
@@ -27,9 +27,9 @@ const CategoriesPage = () => {
         >
         </div>
 
-        <div className='w-1/4 left-1/3 border-2 absolute bottom-13 opacity-20'></div>
-        <div className='w-1/4 left-1/4 border-2 absolute bottom-10 opacity-20'></div>
-        <div className='w-1/4 left-1/5 border-2 absolute bottom-7 opacity-20'></div>
+        <div className='w-1/4 left-1/3 border-2 absolute bottom-13 opacity-20 dark:opacity-70'></div>
+        <div className='w-1/4 left-1/4 border-2 absolute bottom-10 opacity-20 dark:opacity-70'></div>
+        <div className='w-1/4 left-1/5 border-2 absolute bottom-7  opacity-20 dark:opacity-70'></div>
 
         {/* --- CONTENT --- */}
 

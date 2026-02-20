@@ -80,8 +80,8 @@ const ExploreClient = ({ initialProducts, currentPage, totalPages }: any) => {
         </h1>
 
         {/* 4. Adaptive Search Bar */}
-        <div className="relative max-w-2xl mx-auto group">
-           <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit, saepe. Ipsum laudantium debitis porro obcaecati at atque laborum mollitia dolorem temporibus illum, repellat aliquam dolorum!</p>
+        <div className="relative border p-3 rounded-2xl max-w-2xl mx-auto group">
+           <p className='dark:text-muted/50'>Lorem ipsum, dolor sit amet consectetur adipisicing debitis porro obcaecati at atque laborum mollitia dolorem temporibus illum, repellat aliquam dolorum!</p>
         </div>
 
         {/* Dynamic Tags */}
@@ -100,17 +100,6 @@ const ExploreClient = ({ initialProducts, currentPage, totalPages }: any) => {
         <div className="space-y-1 text-center md:text-left">
           <h2 className="text-3xl font-black tracking-tight text-zinc-800 dark:text-zinc-200">The Collection</h2>
           <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em]">Showing {initialProducts.length} curated assets</p>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <button className="flex items-center gap-2 h-12 px-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-[10px] font-black uppercase tracking-widest hover:border-primary transition-all">
-            <SlidersHorizontal size={14} /> Filter
-          </button>
-          <select className="h-12 px-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-[10px] font-black uppercase tracking-widest outline-none appearance-none cursor-pointer hover:border-primary transition-all">
-            <option>Trending Now</option>
-            <option>Recently Added</option>
-            <option>Most Downloaded</option>
-          </select>
         </div>
       </div>
 

@@ -62,8 +62,8 @@ const ProductCarousel = ({ cards}:any) => {
 
             <div className="flex flex-col">
               
-              <div className="flex items-center text-center m-auto gap-1 bg-zinc-900 dark:bg-zinc-100 hover:bg-black/80 dark:hover:bg-black/10 transition-all duration-200 px-2.5 py-1 rounded-md shadow-md">
-                <div className="h-6  flex items-center gap-2 justify-center rounded-md text-zinc-100 dark:text-zinc-500 cursor-pointer">
+              <div className="flex items-center text-center m-auto gap-1 bg-zinc-900 dark:bg-primary/20 hover:bg-black/80 dark:hover:bg-primary/10 transition-all duration-200 px-2.5 py-1 rounded-md shadow-md">
+                <div className="h-6  flex items-center gap-2 justify-center rounded-md text-zinc-100 dark:text-white cursor-pointer">
                   <p className='text-sm'>copy</p>
                   <Copy size={16} />
                 </div>

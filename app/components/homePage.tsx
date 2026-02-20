@@ -7,10 +7,10 @@ import ProductCard from './productCard';
 
 
 const CategorySection = ({ title, count, cards }: any) => (
-  <div className="w-full">
+  <div className="w-full py-5">
     <div className='mb-5  flex justify-between items-center px-4 py-1'>
       <div>
-        <h2 className="text-2xl font-black tracking-tight text-muted/90">{title}</h2>
+        <h2 className="text-2xl font-black tracking-tight text-muted/90 dark:text-muted/90">{title}</h2>
         <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em]">
           Showing {count} Products
         </p>
@@ -37,7 +37,7 @@ const params = await searchParams;
  
   return (
 <>
-      <div className="relative w-full h-max mx-auto mb-10 overflow-hidden rounded-3xl border border-black/5 dark:border-white/10 shadow-md dark:bg-zinc-900">
+      <div className="relative w-full h-max mx-auto mb-5 overflow-hidden rounded-3xl border border-black/5 dark:border-white/10 shadow-md dark:bg-zinc-900">
         
         {/* Decorative Background Elements */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
@@ -104,7 +104,8 @@ const params = await searchParams;
 
 
       <div className='mt-20'>
-        <h2 className="text-4xl text-center mb-5 font-black tracking-tight text-muted/90">Most Downloads</h2>
+        <h2 className="text-4xl mb-2 font-black tracking-tight text-muted/90">Most Downloads</h2>
+        <p className='mb-8 text-muted-foreground font-semibold text-sm w-xl'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. A molestiae officiis aliquam. Nisi facilis et voluptatibus nemo quibusdam officia unde.</p>
        <ProductCard href="categories" prod={data.mostdownloads}/>
       </div>
 </>
