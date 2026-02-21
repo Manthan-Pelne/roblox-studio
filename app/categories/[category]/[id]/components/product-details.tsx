@@ -82,6 +82,9 @@ const ProductDetailsPage = ({ initialProduct, relatedProducts }: any) => {
 
         {/* --- RELATED PRODUCTS --- */}
 
+        <div className='mt-12 flex items-center justify-between '>
+                  <h2 className="text-[20px] font-black tracking-[0.5em] opacity-30 uppercase ">Related products</h2>
+        </div>
         
             <ProductCard href="categories" prod={relatedProducts}/>
           

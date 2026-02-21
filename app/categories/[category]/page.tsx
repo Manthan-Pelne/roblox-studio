@@ -1,5 +1,5 @@
 // Adjust path as needed
-import { getProductsByCategory } from "@/app/actions/category";
+import { getCategories, getCategoryBySlug, getProductsByCategory } from "@/app/actions/category";
 import { notFound } from "next/navigation";
 import CategoryDetailsPage from "./components/category-page";
 
@@ -13,6 +13,7 @@ const CategoryPage = async ({ params }: PageProps) => {
 
   // Fetch real data from MongoDB
   const products = await getProductsByCategory(categoryName);
+  const category = await getCategoryBySlug(categoryName)
 
   // Optional: If no products exist for a category name that doesn't exist
   if (!products || products.length === 0) {
@@ -22,6 +23,7 @@ const CategoryPage = async ({ params }: PageProps) => {
 
   return (
     <CategoryDetailsPage
+     categoryDetails={category}
       initialProducts={products} 
       categoryName={categoryName} 
     />

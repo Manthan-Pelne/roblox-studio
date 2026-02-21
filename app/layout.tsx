@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import {AppSidebar} from "./components/app-sidebar";
+import { AppSidebar } from "./components/app-sidebar";
 import Header from "./components/header";
 import { ThemeProvider } from "./components/theme-provider";
+import Sidebar from "./components/sidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,24 +34,24 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
-        <SidebarProvider>
-          <AppSidebar/>
-       
-     {/* Wrap content in a div that handles the remaining width */}
-  <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
-    <div className="flex items-center px-4">
-       <SidebarTrigger />
-       <Header /> 
-    </div>
-    <main className="flex-1 overflow-y-auto px-4 md:px-6 py-4">
-      {children}
-    </main>
-  </div>
-        </SidebarProvider>
+          <SidebarProvider>
+            <Sidebar/>
+
+            {/* Wrap content in a div that handles the remaining width */}
+            <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
+              <div className="flex items-center px-4">
+                <SidebarTrigger />
+                <Header />
+              </div>
+              <main className="flex-1 overflow-y-auto px-4 md:px-6 py-4">
+                {children}
+              </main>
+            </div>
+          </SidebarProvider>
         </ThemeProvider>
       </body>
     </html>

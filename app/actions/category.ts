@@ -12,6 +12,28 @@ export async function getCategories() {
 
 
 
+export async function getCategoryBySlug(slug: string) {
+  try {
+    await connectDB();
+    
+    // Find one category matching the slug
+    // We use a case-insensitive regex to be safe with URL casing
+    const category = await Category.findOne({ 
+      slug: { $regex: new RegExp(`^${slug}$`, "i") } 
+    }).lean();
+
+    if (!category) return null;
+
+    // Convert BSON to plain JSON object
+    return JSON.parse(JSON.stringify(category));
+  } catch (error) {
+    console.error("Error fetching category:", error);
+    return null;
+  }
+}
+
+
+
 //
 
 export async function getProductsByCategory(categoryName: string) {

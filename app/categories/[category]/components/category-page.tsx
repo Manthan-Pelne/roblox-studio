@@ -5,9 +5,9 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import ProductCard from '@/app/components/productCard';
 
-const CategoryDetailsPage = ({ initialProducts, categoryName }: any) => {
+const CategoryDetailsPage = ({ categoryDetails, initialProducts }: any) => {
 
-const displayName = categoryName ? categoryName.replace(/-/g, ' ') : "Category";
+//console.log("initil",categoryDetails)
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] border rounded-3xl dark:bg-zinc-950 p-6 md:p-7">
@@ -33,7 +33,7 @@ const displayName = categoryName ? categoryName.replace(/-/g, ' ') : "Category";
       </div>
 
       <h1 className="text-4xl md:text-7xl font-black tracking-tighter uppercase italic leading-[0.85] mb-8">
-        {displayName}
+        {categoryDetails.slug}
       <span className='text-primary'> .</span>
       </h1>
 
@@ -66,11 +66,19 @@ const displayName = categoryName ? categoryName.replace(/-/g, ' ') : "Category";
         
         {/* Main Asset Image */}
         <div className="absolute inset-0 bg-white dark:bg-zinc-800 rounded-3xl shadow-2xl border border-zinc-200 dark:border-zinc-700 overflow-hidden">
-          <img 
+          { initialProducts[0] ? 
+          
+           <img 
+            src={`${process.env.NEXT_PUBLIC_R2_CDN_URL}/${initialProducts[0].image.key}`}
+            className="w-full h-full object-cover p-4 group-hover:scale-110 transition-transform duration-700" 
+            alt="Asset Preview" 
+          /> :
+            <img 
             src="/1758793362119-group.png" 
             className="w-full h-full object-cover p-4 group-hover:scale-110 transition-transform duration-700" 
             alt="Asset Preview" 
-          />
+          /> 
+          }
         </div>
 
         {/* Floating Detail Tags */}

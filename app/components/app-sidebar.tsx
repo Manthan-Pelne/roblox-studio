@@ -1,29 +1,45 @@
-import {Home,Compass,Info,Mail,HelpCircle,Sparkles,ChevronDown,Command,Plus} from "lucide-react"
-import {Sidebar,SidebarContent,SidebarFooter,SidebarGroup,SidebarGroupAction,SidebarGroupContent,SidebarGroupLabel,SidebarHeader,SidebarMenu,SidebarMenuButton,SidebarMenuItem,SidebarRail} from "@/components/ui/sidebar"
+"use client"
+import { 
+  Home, Compass, Info, Mail, HelpCircle, 
+  Sparkles, ChevronDown, LayoutGrid 
+} from "lucide-react"
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarRail,
+} from "@/components/ui/sidebar"
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
 import Link from "next/link"
-import { getCategories } from "../actions/category"
 
+// Note: In Next.js App Router, it's better to fetch this in a Server Parent 
+// and pass it down, or use a Client-side fetch.
+interface Category {
+  _id: string;
+  slug: string;
+}
 
-const categories = await getCategories()
-
-
-export function AppSidebar() {
+export function AppSidebar({ categories }: { categories: Category[] }) {
   return (
-    <Sidebar collapsible="icon">
-      <SidebarHeader>
+    <Sidebar collapsible="icon" className="border-r border-border/50">
+      <SidebarHeader className="py-4">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <a href="/">
-
-                <div className="grid flex-1 text-left text-sm leading-tight group-data-[collapsible=icon]:hidden">
-                  <div className="font-extrabold text-xl flex items-center gap-1 shrink-0 mb-1">
-                    <svg className="text-primary" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24">
+            <SidebarMenuButton size="lg" asChild className="hover:bg-transparent">
+              <Link href="/" className="flex items-center gap-3">
+                    <div className="font-black italic text-xl flex items-center gap-1 shrink-0 mb-1">
+                    <svg className="text-primary" xmlns="http://www.w3.org/2000/svg" width="29" height="26" viewBox="0 0 24 24">
                       <path fill="currentColor" d="M12 12.3L3.5 7.05L12 1.8l8.5 5.25z" />
                       <path fill="currentColor" d="M12 22.2v-9.9l8.5-5.25v9.9z" opacity="0.25" />
                       <path fill="currentColor" d="m12 22.2l-8.5-5.25v-9.9L12 12.3z" opacity="0.5" />
@@ -31,46 +47,58 @@ export function AppSidebar() {
                     Roblox
                     <span className="text-primary">Studio.</span>
                   </div>
-                </div>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
 
-      <hr />
-
-      <SidebarContent>
-        {/* 2. Main Navigation Group */}
+      <SidebarContent className="gap-2 px-2">
+        {/* Main Navigation */}
         <SidebarGroup>
-          <SidebarGroupLabel className="group-data-[collapsible=icon]:hidden text-base">Navigation</SidebarGroupLabel>
-          <SidebarMenu className="font-medium text-muted-foreground">
+          <SidebarGroupLabel className="px-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground/90 group-data-[collapsible=icon]:hidden">
+            Navigation
+          </SidebarGroupLabel>
+          <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton tooltip="Home">
-                <Home /> <span>Home</span>
+              <SidebarMenuButton asChild tooltip="Home" className="transition-colors hover:bg-accent">
+                <Link href="/">
+                  <Home className="size-4" /> 
+                  <span className="font-medium">Home</span>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton tooltip="Explore">
-                <Compass /> <Link href="/explore">Explore</Link>
+              <SidebarMenuButton asChild tooltip="Explore" className="transition-colors hover:bg-accent">
+                <Link href="/explore">
+                  <Compass className="size-4" /> 
+                  <span className="font-medium">Explore</span>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
 
-
+        {/* Categories Section */}
         <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-          <SidebarGroupLabel className="text-base flex justify-between">Categories
-            <Link href="/categories" className="text-xs border-2 border-secondary rounded-xl px-3 py-0.5">View All</Link>
-          </SidebarGroupLabel>
-          {/* We use max-h and custom scrollbar for a sleek feel */}
-          <SidebarGroupContent className="max-h-[180px] overflow-y-auto pl-2 scrollbar-thin scrollbar-thumb-muted">
+          <div className="flex items-center justify-between px-2 mb-2">
+            <SidebarGroupLabel className="p-0 text-xs font-semibold uppercase tracking-wider text-muted-foreground/90">
+              Categories
+            </SidebarGroupLabel>
+            <Link 
+              href="/categories" 
+              className="text-[10px] font-bold uppercase tracking-tighter bg-secondary/50 hover:bg-secondary text-secondary-foreground px-2 py-0.5 rounded-full transition-all"
+            >
+              View All
+            </Link>
+          </div>
+          <SidebarGroupContent className="max-h-[210px] overflow-y-auto pr-2 scrollbar-hide hover:scrollbar-default transition-all pl-1">
             <SidebarMenu>
-              {categories.map((category:any) => (
+              {categories?.map((category) => (
                 <SidebarMenuItem key={category._id}>
-                  <SidebarMenuButton asChild className="h-8">
+                  <SidebarMenuButton asChild className="h-9 rounded-md transition-all hover:translate-x-1 active:scale-95">
                     <Link href={`/categories/${category.slug.toLowerCase()}`}>
-                      {/* No icon here for a cleaner text-only look */}
+                      <LayoutGrid className="size-3.5 text-muted-foreground/50" />
                       <span className="text-sm font-medium text-muted-foreground hover:text-foreground">
                         {category.slug.charAt(0).toUpperCase() + category.slug.slice(1)}
                       </span>
@@ -82,27 +110,29 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
-
-        {/* 3. Collapsible Support Group */}
+        {/* Support Section */}
         <Collapsible defaultOpen className="group/collapsible">
           <SidebarGroup>
-            <SidebarGroupLabel asChild className="text-base group-data-[collapsible=icon]:hidden">
-              <CollapsibleTrigger className="">
+            <SidebarGroupLabel asChild className="text-xs text-muted-foreground/90 font-semibold uppercase tracking-wider group-data-[collapsible=icon]:hidden">
+              <CollapsibleTrigger className="flex w-full items-center justify-between hover:bg-accent/50 p-2 rounded-md transition-colors">
                 Support
-                <ChevronDown className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-180" />
+                <ChevronDown className="ml-auto size-4 transition-transform duration-300 group-data-[state=open]/collapsible:rotate-180" />
               </CollapsibleTrigger>
             </SidebarGroupLabel>
-            <CollapsibleContent className="animate-collapsible-down">
-              <SidebarGroupContent>
-                <SidebarMenu className="font-medium text-muted-foreground hover:text-foreground">
+            <CollapsibleContent className="animate-in fade-in-50 slide-in-from-top-1">
+              <SidebarGroupContent className="pt-1">
+                <SidebarMenu>
                   {[
-                    { title: "About Us", icon: Info },
-                    { title: "Contact Us", icon: Mail },
-                    { title: "FAQ", icon: HelpCircle },
+                    { title: "About Us", icon: Info, href: "/about-us" },
+                    { title: "Contact Us", icon: Mail, href: "/contact-us" },
+                    { title: "FAQs", icon: HelpCircle, href: "/faq" },
                   ].map((item) => (
                     <SidebarMenuItem key={item.title}>
-                      <SidebarMenuButton tooltip={item.title}>
-                        <item.icon /> <span>{item.title}</span>
+                      <SidebarMenuButton asChild tooltip={item.title} className="hover:bg-accent">
+                        <Link href={item.href}>
+                          <item.icon className="size-4" />
+                          <span className="font-medium ">{item.title}</span>
+                        </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   ))}
@@ -113,22 +143,22 @@ export function AppSidebar() {
         </Collapsible>
       </SidebarContent>
 
-      {/* 4. Footer with Primary Action */}
-      <SidebarFooter>
+      <SidebarFooter className="p-4">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
+              asChild
               tooltip="Get Started"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground transition-all group-data-[collapsible=icon]:p-2"
+              className="relative overflow-hidden bg-primary text-primary-foreground shadow-md hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 group-data-[collapsible=icon]:p-2 h-11"
             >
-              <Sparkles />
-              <span className="font-medium group-data-[collapsible=icon]:hidden">Get Started</span>
+              <Link href="/get-started" className="flex items-center justify-center gap-2">
+                <Sparkles className="size-4 animate-pulse" />
+                <span className="font-semibold group-data-[collapsible=icon]:hidden">Get Started</span>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
-
-      {/* The Rail allows clicking/dragging to resize/toggle */}
       <SidebarRail />
     </Sidebar>
   )

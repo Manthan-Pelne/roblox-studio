@@ -66,7 +66,7 @@ useEffect(() => {
 
        {/* Desktop Search Wrapper */}
         <div className="relative w-full max-w-md mx-auto mt-1">
-          <div className="relative flex items-center bg-[#f8f4f4] dark:bg-zinc-800 rounded-full border focus-within:border-secondary dark:focus-within:border-secondary/70 active:shadow focus-within:shadow transition-all duration-200">
+          <div className="relative flex items-center bg-[#FAFAFA] dark:bg-zinc-800 rounded-full border focus-within:border-secondary dark:focus-within:border-secondary/70 active:shadow focus-within:shadow transition-all duration-200">
             <Search size={18} className="ml-4 text-zinc-400" />
             <input 
               type="text" 
